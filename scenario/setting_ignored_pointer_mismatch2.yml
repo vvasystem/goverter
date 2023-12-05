@@ -13,10 +13,10 @@ input:
             FullName string
         }
         type Input2 struct {
-            Value Input
+            Value *Input
         }
         type Output2 struct {
-            Value Output
+            Value *Output
         }
         type Output struct {
             Name string
@@ -27,12 +27,16 @@ error: |-
 
     | github.com/jmattheis/goverter/execution.Input2
     |
-    |      | github.com/jmattheis/goverter/execution.Input
+    |      | *github.com/jmattheis/goverter/execution.Input
     |      |
-    source.Value
-    target.Value
+    |      |    | github.com/jmattheis/goverter/execution.Input
+    |      |    |
+    source.Value*
+    target.Value*
+    |      |    |
+    |      |    | github.com/jmattheis/goverter/execution.Output
     |      |
-    |      | github.com/jmattheis/goverter/execution.Output
+    |      | *github.com/jmattheis/goverter/execution.Output
     |
     | github.com/jmattheis/goverter/execution.Output2
 
@@ -41,7 +45,8 @@ error: |-
     Move these field related settings:
         goverter:map FullName Name
 
-    from the "Convert" method to the "structsInputToStructsOutput" method.
+    from the "Convert" method to a newly created method with this signature:
+        func(github.com/jmattheis/goverter/execution.Input) github.com/jmattheis/goverter/execution.Output
 
     Goverter won't use "Convert" inside the current conversion method
     and therefore the defined field settings would be ignored.

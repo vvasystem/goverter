@@ -42,10 +42,7 @@ error: |-
     Move these field related settings:
         goverter:map Inputs Outputs
 
-    from this method:
-        func (github.com/jmattheis/goverter/execution.Converter).Convert(source *github.com/jmattheis/goverter/execution.Input) *github.com/jmattheis/goverter/execution.Output
+    from the "Convert" method to the "structsInputToStructsOutput" method.
 
-    To a method you have to create with the following signature:
-        func(github.com/jmattheis/goverter/execution.Input) github.com/jmattheis/goverter/execution.Output
-
-    Goverter will not use Convert inside the current conversion method, thus, field related settings would be ignored.
+    Goverter won't use "Convert" inside the current conversion method
+    and therefore the defined field settings would be ignored.
